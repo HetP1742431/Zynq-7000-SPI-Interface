@@ -1,0 +1,160 @@
+// Include FreeRTOS Libraries
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+// Include xilinx Libraries
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xscugic.h"
+#include "xil_exception.h"
+#include "xil_printf.h"
+#include "xil_cache.h"
+
+// Other miscellaneous libraries
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include "pmodkypd.h"
+#include "sleep.h"
+#include "PmodOLED.h"
+
+
+
+#define FRAME_DELAY 50000
+
+
+// Declaring the devices
+PmodOLED oledDevice;
+
+// Function prototypes
+void initializeScreen();
+static void oledTask( void *pvParameters );
+
+// To change between PmodOLED and OnBoardOLED is to change Orientation
+const u8 orientation = 0x0; // Set up for Normal PmodOLED(false) vs normal
+                            // Onboard OLED(true)
+const u8 invert = 0x0; // true = whitebackground/black letters
+                       // false = black background /white letters
+
+int main()
+{
+	// Initialize Devices
+	initializeScreen();
+
+	xil_printf("Initialization Complete, System Ready!\n");
+
+	xTaskCreate( oledTask					/* The function that implements the task. */
+			   , "screen task"				/* Text name for the task, provided to assist debugging only. */
+			   , configMINIMAL_STACK_SIZE	/* The stack allocated to the task. */
+			   , NULL						/* The task parameter is not used, so set to NULL. */
+			   , tskIDLE_PRIORITY			/* The task runs at the idle priority. */
+			   , NULL
+			   );
+
+	vTaskStartScheduler();
+
+   while(1);
+
+   return 0;
+}
+
+
+void initializeScreen()
+{
+   OLED_Begin(&oledDevice, XPAR_PMODOLED_0_AXI_LITE_GPIO_BASEADDR,
+         XPAR_PMODOLED_0_AXI_LITE_SPI_BASEADDR, orientation, invert);
+}
+
+
+static void oledTask( void *pvParameters )
+{
+	int irow, ib, i;
+	u8 *pat;
+	u32 ticks=0;
+
+	xil_printf("PmodOLED Demo Ready\n\r");
+
+	while (1) {
+		ticks = xTaskGetTickCount();
+		xil_printf("Lab 3 demo started  at: %d\r\n\n", ticks);
+		// Choosing Fill pattern 0
+		pat = OLED_GetStdPattern(0);
+		OLED_SetFillPattern(&oledDevice, pat);
+		// Turn automatic updating off
+		OLED_SetCharUpdate(&oledDevice, 0);
+
+		// Display text on the screen one pixel row at a time
+		// by sweeping a horizontal line from top to bottom
+		xil_printf("\t1. text and line demo\r\n");
+		for (irow = 0; irow < OledRowMax; irow++) {
+			OLED_ClearBuffer(&oledDevice);
+			OLED_SetCursor(&oledDevice, 0, 0);
+			OLED_PutString(&oledDevice, "ECE 315 Lab");
+			OLED_SetCursor(&oledDevice, 0, 1);
+			OLED_PutString(&oledDevice, "SPI Demo");
+			OLED_SetCursor(&oledDevice, 0, 2);
+			OLED_PutString(&oledDevice, "OLED Screen");
+
+			OLED_MoveTo(&oledDevice, 0, irow);
+			OLED_FillRect(&oledDevice, 127, 31);
+			OLED_MoveTo(&oledDevice, 0, irow);
+			OLED_LineTo(&oledDevice, 127, irow);
+			OLED_Update(&oledDevice);
+			vTaskDelay(5);
+		}
+
+		vTaskDelay(100);
+		// Blink the display three times.
+		xil_printf("\t2. blinking display");
+		for (i = 0; i < 3; i++) {
+			xil_printf(" . ");
+			OLED_DisplayOff(&oledDevice);
+			vTaskDelay(50);
+			OLED_DisplayOn(&oledDevice);
+			vTaskDelay(50);
+		}
+		xil_printf("\r\n");
+		vTaskDelay(2);
+
+
+		// Now erase the characters from the display
+		// by sweeping horizontal line back up
+		xil_printf("\t3. cleaning display\r\n");
+		for (irow = OledRowMax - 1; irow >= 0; irow--){
+			OLED_SetDrawColor(&oledDevice, 1);
+			OLED_SetDrawMode(&oledDevice, OledModeSet);
+			OLED_MoveTo(&oledDevice, 0, irow);
+			OLED_LineTo(&oledDevice, 127, irow);
+			OLED_Update(&oledDevice);
+			vTaskDelay(10);
+			OLED_SetDrawMode(&oledDevice, OledModeXor);
+			OLED_MoveTo(&oledDevice, 0, irow);
+			OLED_LineTo(&oledDevice, 127, irow);
+			OLED_Update(&oledDevice);
+		}
+		vTaskDelay(100);
+
+		// Draw a rectangle in center of screen
+		// Display the 8 different patterns available
+		xil_printf("\t4. showing rectangle fill patterns: ");
+		OLED_SetDrawMode(&oledDevice, OledModeSet);
+
+		for (ib = 1; ib < 8; ib++) {
+			xil_printf("%d ",ib);
+			OLED_ClearBuffer(&oledDevice);
+			pat = OLED_GetStdPattern(ib);
+			OLED_SetFillPattern(&oledDevice, pat);
+			OLED_MoveTo(&oledDevice, 55, 1);
+			OLED_FillRect(&oledDevice, 75, 27);
+			OLED_DrawRect(&oledDevice, 75, 27);
+			OLED_Update(&oledDevice);
+			vTaskDelay(100);
+		}
+
+		ticks = xTaskGetTickCount();
+		xil_printf("\n\ndemo finished at: %d\r\n\n", ticks);
+		vTaskDelay(100);
+	}
+
+}

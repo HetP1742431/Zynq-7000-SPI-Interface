@@ -1,0 +1,46 @@
+{
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0.19  2019-03-26 bk=1.5019 VDI=41 GEI=35 GUI=JA:9.0 non-TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 4 -x 1330 -y 70 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 4 -x 1330 -y 90 -defaultsOSRD
+preplace port jc -pg 1 -lvl 4 -x 1330 -y 500 -defaultsOSRD
+preplace port keypad -pg 1 -lvl 4 -x 1330 -y 180 -defaultsOSRD
+preplace port btns_4bits -pg 1 -lvl 4 -x 1330 -y 320 -defaultsOSRD
+preplace port sws_4bits -pg 1 -lvl 4 -x 1330 -y 360 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x 400 -y 280 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -x 840 -y 310 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 400 -y 650 -defaultsOSRD
+preplace inst PmodOLED_0 -pg 1 -lvl 3 -x 1170 -y 500 -defaultsOSRD
+preplace inst keypad -pg 1 -lvl 3 -x 1170 -y 180 -defaultsOSRD
+preplace inst inputs -pg 1 -lvl 3 -x 1170 -y 340 -defaultsOSRD
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 -10 10 670 120 1030
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 0 550 600
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 2 690 130 1000
+preplace netloc processing_system7_0_SPI1_SS1_O 1 1 1 640 230n
+preplace netloc processing_system7_0_SPI0_SS_O 1 1 1 600 250n
+preplace netloc processing_system7_0_SPI1_MISO_O 1 1 1 630 210n
+preplace netloc processing_system7_0_SPI1_MOSI_O 1 1 1 650 170n
+preplace netloc processing_system7_0_SPI0_MOSI_O 1 1 1 610 190n
+preplace netloc processing_system7_0_SPI1_SCLK_O 1 1 1 660 130n
+preplace netloc processing_system7_0_SPI0_SCLK_O 1 1 1 620 150n
+preplace netloc processing_system7_0_DDR 1 1 3 NJ 70 NJ 70 NJ
+preplace netloc keypad_GPIO 1 3 1 N 180
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 680 190n
+preplace netloc PmodOLED_0_Pmod_out 1 3 1 NJ 500
+preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ 90 NJ 90 NJ
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 1 990 320n
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 1020 300n
+preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 1020 160n
+preplace netloc ps7_0_axi_periph_M03_AXI 1 2 1 1010 320n
+preplace netloc inputs_GPIO 1 3 1 1310J 320n
+preplace netloc inputs_GPIO2 1 3 1 1310J 350n
+levelinfo -pg 1 -30 400 840 1170 1330
+pagesize -pg 1 -db -bbox -sgen -30 -90 1450 1030
+"
+}
+{
+   "da_axi4_cnt":"5",
+   "da_board_cnt":"3",
+   "da_ps7_cnt":"1"
+}

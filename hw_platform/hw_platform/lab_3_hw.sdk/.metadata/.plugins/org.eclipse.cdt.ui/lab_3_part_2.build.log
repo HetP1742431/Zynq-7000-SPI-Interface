@@ -1,0 +1,28 @@
+15:15:01 **** Auto Build of configuration Debug for project lab_3_part_2 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/lab_3_part_2_student.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/lab_3_part_2_student.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../lab_3_part_2_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/lab_3_part_2_student.d" -MT"src/lab_3_part_2_student.o" -o "src/lab_3_part_2_student.o" "../src/lab_3_part_2_student.c"
+'Finished building: ../src/lab_3_part_2_student.c'
+' '
+'Building file: ../src/pmodkypd.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/pmodkypd.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../lab_3_part_2_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/pmodkypd.d" -MT"src/pmodkypd.o" -o "src/pmodkypd.o" "../src/pmodkypd.c"
+'Finished building: ../src/pmodkypd.c'
+' '
+'Building target: lab_3_part_2.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../lab_3_part_2_bsp/ps7_cortexa9_0/lib -o "lab_3_part_2.elf"  ./src/lab_3_part_2_student.o ./src/pmodkypd.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group
+'Finished building target: lab_3_part_2.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size lab_3_part_2.elf  |tee "lab_3_part_2.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89748	   3400	  90336	 183484	  2ccbc	lab_3_part_2.elf
+'Finished building: lab_3_part_2.elf.size'
+' '
+
+15:15:03 Build Finished (took 1s.309ms)
+

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# 
+# Start of session at: Wed Feb 28 15:42:07 2024
+# Process ID: 5296
+# Current directory: C:/Users/andarala/Desktop/lab3/pmod_oled.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: C:/Users/andarala/Desktop/lab3/pmod_oled.sdk/webtalk/webtalk.log
+# Journal file: C:/Users/andarala/Desktop/lab3/pmod_oled.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

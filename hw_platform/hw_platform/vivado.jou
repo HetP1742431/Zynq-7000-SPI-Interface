@@ -1,0 +1,16 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Thu Feb 29 09:37:49 2024
+# Process ID: 16224
+# Current directory: C:/Users/ecetech/Desktop/lab_3_final.xpr/pmod_oled
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16096 C:\Users\ecetech\Desktop\lab_3_final.xpr\pmod_oled\pmod_oled.xpr
+# Log file: C:/Users/ecetech/Desktop/lab_3_final.xpr/pmod_oled/vivado.log
+# Journal file: C:/Users/ecetech/Desktop/lab_3_final.xpr/pmod_oled\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/ecetech/Desktop/lab_3_final.xpr/pmod_oled/pmod_oled.xpr
+update_compile_order -fileset sources_1
+save_project_as lab_3_hw C:/Users/ecetech/Desktop/lab_3_final.xpr/lab_3_hw -exclude_run_results -force
+archive_project C:/Users/ecetech/Desktop/lab_3_final.xpr/lab_3_hw.xpr.zip -temp_dir C:/Users/ecetech/Desktop/lab_3_final.xpr/pmod_oled/.Xil/Vivado-16224-TECH-C98I8JRGUQ -force -include_config_settings
